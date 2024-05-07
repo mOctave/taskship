@@ -85,9 +85,11 @@ mission "Taskship: Quicksilver"
 		dialog "You have successfully disabled the <npc>, and can stop firing on it now. Of course, no one said you have to stop now either..."
 		on disable
 			payment 150000
+			fail
 	on accept
 		payment -75000
-
+	on fail
+		dialog `As soon as you launch with your escorts, you receive a message from the captain of the <npc>: "What part of the word 'duel' do you not understand? Thanks for the money, kid, 'cause you're not getting it back."`
 
 mission "Taskship: Raven"
 	name "Wanted criminal near <system>"
