@@ -1,0 +1,127 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Argosy"
+	name "Frontier rush delivery to <planet>"
+	job
+	repeat
+	description `Deliver <cargo> to the frontier world of <destination> by <date>. Frontier systems have a high rate of piracy, so prepare to defend yourself. Payment is <payment>.`
+	deadline
+	cargo random 5 2 .1
+	to offer
+		random < 25
+		has "flagship model: Argosy"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		not attributes "frontier"
+	destination
+		not government "Pirate"
+		distance 2 10
+		attributes "frontier"
+	npc
+		government "Pirate"
+		personality nemesis harvests plunders
+			confusion 30
+		system destination
+		fleet
+			variant
+				"Scrapper"
+			variant
+				"Sparrow"
+			variant
+				"Hawk"
+			variant
+				"Fury"
+	npc
+		government "Pirate"
+		personality nemesis staying harvests plunders
+			confusion 30
+		system destination
+		fleet
+			variant
+				"Sparrow"
+			variant
+				"Hawk"
+			variant
+				"Fury"
+			variant
+				"Berserker"
+			variant
+				"Wasp"
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment 6000 210
+		dialog phrase "generic cargo delivery payment"
+
+mission "Taskship: Clipper"
+	name "Secure delivery to <planet>"
+	job
+	repeat
+	description `A wealthy businessman is looking for a secure but unassuming ship to deliver <cargo> to the world of <destination>. The cargo will be accompanied by <bunks> private guards. Payment is <payment>.`
+	cargo "confidential documents" 1 3 .8
+	passengers 2 1 .4
+	to offer
+		random < 25
+		has "flagship model: Clipper"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		distance 2 10
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment 2000 300
+		dialog "As soon as you land, the guards load the boxes of documents on a trolley and start unloading them. Once they're all off the ship, the senior guard hands you a credit chip worth <payment>."
+
+mission "Taskship: Freighter"
+	name "Bulk delivery to <planet>"
+	job
+	repeat
+	description "Deliver <cargo> to <destination>. Payment is <payment>."
+	cargo random 25 2 .05
+	to offer
+		random < 40
+		has "flagship model: Freighter"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		distance 4 6
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment
+		payment 1000
+		dialog phrase "generic cargo delivery payment"
+
+mission "Taskship: Hauler"
+	name "Delivery to <planet>"
+	job
+	repeat
+	description "Deliver <cargo> to <destination>. Payment is <payment>."
+	cargo random 10 2 .1
+	to offer
+		random < 80
+		has "flagship model: Hauler"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		distance 1 4
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment
+		dialog phrase "generic cargo delivery payment"

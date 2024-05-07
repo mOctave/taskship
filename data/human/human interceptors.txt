@@ -1,0 +1,253 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Berserker"
+	name "Duel the <npc>"
+	job
+	repeat
+	description `The captain of the <npc> wishes to challenge you to a no-holds-barred interceptor duel. If you win, you stand to win <payment>, but first you'll have to ante up 40,000 credits.`
+	"apparent payment" 80000
+	to offer
+		random < 20
+		has "flagship model: Berserker"
+		"total ships" = 1
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
+	npc disable
+		government "Duelist"
+		personality daring nemesis plunders unconstrained opportunistic staying launching
+			confusion 10
+		fleet
+			names "bounty hunter"
+			variant
+				"Berserker"
+			variant
+				"Berserker (Afterburner)"
+			variant
+				"Berserker (Strike)"
+		dialog "You have successfully disabled the <npc>, and can stop firing on it now. Of course, no one said you have to stop now either..."
+		on disable
+			payment 80000
+			fail
+	on accept
+		payment -40000
+	on fail
+		dialog `As soon as you launch with your escorts, you receive a message from the captain of the <npc>: "What part of the word 'duel' do you not understand? Thanks for the money, kid, 'cause you're not getting it back."`
+
+mission "Taskship: Enforcer"
+	name "Mock battle at <system>"
+	job
+	repeat
+	description `A group of live-action roleplay enthusiasts are interested in hosting a massive mock battle set during the Alpha Wars. Because of your period ship, they're willing to offer you <payment> to participate. If you can win without destroying any ships, they'll pay you <payment>.`
+	to offer
+		random < 5
+		has "flagship model: Enforcer"
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent"
+	npc save
+		government `"Republic"`
+		personality disables staying target escort
+			confusion 40
+		fleet
+			names "civilian"
+			variant
+				"Enforcer" 3
+			variant
+				"Berserker" 2
+			variant
+				"Saber"
+		system destination
+	npc save
+		government `"Republic"`
+		personality disables staying target escort
+			confusion 40
+		fleet
+			names "civilian"
+			variant
+				"Saber" 3
+			variant
+				"Firebird" 2
+			variant
+				"Leviathan"
+		system destination
+	npc disable save
+		government `"Pirate"`
+		personality disables staying target
+			confusion 40
+		fleet
+			names "pirate"
+			variant
+				"Enforcer" 2
+			variant
+				"Berserker"
+			variant
+				"Saber"
+		system destination
+	npc disable save
+		government `"Pirate"`
+		personality disables staying target
+			confusion 40
+		fleet
+			names "pirate"
+			variant
+				"Enforcer" 2
+			variant
+				"Berserker"
+			variant
+				"Saber"
+			variant
+				"Firebird"
+		system destination
+	npc disable save
+		government `"Pirate"`
+		personality disables staying target
+			confusion 40
+		fleet
+			names "pirate"
+			variant
+				"Firebird"
+			variant
+				"Leviathan"
+		system destination
+	on visit
+		dialog "You land on <planet>, but the mock battle is still raging overhead. Better patch up your ship and get back out there before the LARPers decide you're not worth their money."
+	on complete
+		payment 200000
+		dialog "Landing on <planet>, you're met by a bunch of particularly enthuasiastic role-players who've just spent eight hours running around a ship in ridiculous-looking uniforms. They thank you for your participation and pay you <payment>."
+	on fail
+		dialog "Space is suddenly lit up by a massive explosion. It looks like the LARPers haven't been being nearly careful enough with their fire discipline. Time to get out of here before the government decides you're at fault."
+
+
+mission "Taskship: Fury"
+	name "Duel the <npc>"
+	job
+	repeat
+	description `The captain of the <npc> wishes to challenge you to a no-holds-barred interceptor duel. If you win, you stand to win <payment>, but first you'll have to ante up 50,000 credits.`
+	"apparent payment" 100000
+	to offer
+		random < 10
+		has "flagship model: Fury"
+		"total ships" = 1
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
+	npc disable
+		government "Duelist"
+		personality daring nemesis plunders unconstrained opportunistic staying launching
+			confusion 10
+		fleet
+			names "bounty hunter"
+			variant
+				"Fury"
+			variant
+				"Fury (Bomber)"
+			variant
+				"Fury (Gatling)"
+			variant
+				"Fury (Heavy)"
+			variant
+				"Fury (Laser)"
+			variant
+				"Fury (Missile)"
+		dialog "You have successfully disabled the <npc>, and can stop firing on it now. Of course, no one said you have to stop now either..."
+		on disable
+			payment 100000
+			fail
+	on accept
+		payment -50000
+	on fail
+		dialog `As soon as you launch with your escorts, you receive a message from the captain of the <npc>: "What part of the word 'duel' do you not understand? Thanks for the money, kid, 'cause you're not getting it back."`
+
+mission "Taskship: Hawk"
+	name "Interstellar patrol"
+	job
+	repeat
+	description "The local government here is looking for an interceptor pilot to conduct a patrol of several nearby systems. Fly through <waypoints> before returning to <destination> and exchanging your sensor logs for <payment>."
+	to offer
+		random < 35
+		has "flagship model: Hawk"
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
+		not attributes "paradise" "rich"
+	waypoint
+		distance 1 3
+	waypoint
+		distance 1 3
+	waypoint
+		distance 1 3
+	on visit
+		dialog phrase "generic waypoint on visit"
+	on complete
+		payment 25000
+		dialog "Landing on <planet>, you remember to submit your sensor logs to the local authorities. As soon as you do so, you receive a generic thank-you message followed by a payment of <payment>."
+
+mission "Taskship: Wasp"
+	name "Escort to <planet>"
+	description "Despite your relative inexperience, the captain of the <npc> is willing to pay you <payment> for an escort out of this dangerous region of space to reach <destination> by <date>."
+	repeat
+	job
+	deadline 8
+	to offer
+		random < 50
+		has "flagship model: Wasp"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "frontier"
+	destination
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		not attributes "frontier"
+		distance 2 4
+	npc
+		government "Pirate"
+		personality nemesis harvests plunders
+			confusion 40
+		fleet
+			names "pirate"
+			variant
+				"Sparrow"
+			variant
+				"Fury"
+			variant
+				"Berserker"
+			variant
+				"Scrapper"
+	npc
+		government "Pirate"
+		personality nemesis harvests plunders
+			confusion 40
+		system
+			distance 1
+		fleet
+			names "pirate"
+			variant
+				"Sparrow"
+			variant
+				"Fury"
+			variant
+				"Hawk"
+			variant
+				"Scrapper"
+	
+	npc accompany save
+		government "Merchant"
+		personality escort timid
+		fleet
+			names "civilian"
+			variant
+				"Shuttle"
+			variant
+				"Star Barge"
+	on complete
+		payment 20000
+		dialog phrase "generic safe escort completion dialog"
+	on visit
+		dialog phrase "generic arrived-without-npc dialog"

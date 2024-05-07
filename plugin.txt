@@ -1,0 +1,2 @@
+name "Taskship"
+about "Taskship is a pure content plugin designed to improve the vanilla experience by offering diverse jobs that are available only for captains of specific ships."

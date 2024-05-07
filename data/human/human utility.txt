@@ -1,0 +1,201 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+# Bactrian: Skipped
+
+mission "Taskship: Mule"
+	job
+	repeat
+	name "Medical aid to <planet>"
+	description "A major disease outbreak has occurred on <destination>. Bring <bunks> trained medical experts and <cargo> to <planet> by <date> to help the residents there. Payment is <payment>."
+	passengers 3 4 .6
+	cargo "Medical" 25 2 .05
+	deadline
+	to offer
+		random < 25
+		has "flagship model: Mule"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent" "Pirate"
+		distance 2 6
+		attributes "frontier"
+	npc
+		government "Pirate"
+		personality nemesis harvests plunders
+			confusion 30
+		system destination
+		fleet "Small Northern Pirates"
+	npc
+		government "Pirate"
+		personality nemesis staying harvests plunders
+			confusion 30
+		system destination
+		fleet "Small Northern Pirates" 2
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment 4000 90
+		dialog "You drop off the medical experts and your cargo of <commodity> and collect your payment of <payment>. A group of <planet> citizens thank you for your assistance and bid you farewell."
+
+mission "Taskship: Nest"
+	name "Interstellar patrol"
+	job
+	repeat
+	description "The local government here is looking for an carrier pilot to conduct a patrol of several systems in this sector. Fly through <waypoints> before returning to <destination> and exchanging your sensor logs for <payment>."
+	to offer
+		random < 35
+		has "flagship model: Nest"
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
+		not attributes "paradise" "rich"
+	waypoint
+		distance 1 5
+	waypoint
+		distance 1 5
+	waypoint
+		distance 1 5
+	on visit
+		dialog phrase "generic waypoint on visit"
+	on complete
+		payment 35000
+		dialog "Landing on <planet>, you remember to submit your sensor logs to the local authorities. As soon as you do so, you receive a generic thank-you message followed by a payment of <payment>."
+
+mission "Taskship: Roost"
+	name "Convoy to <planet>"
+	description "This small merchant convoy is looking for a capable civilian captain willing to help ensure that they can reach <destination> by <date> while staying in one piece. Payment is <payment>. You will also be expected to carry <cargo>."
+	job
+	repeat
+	deadline
+	cargo random 5 2 .1
+	to offer
+		random < 20
+		has "flagship model: Roost"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "frontier"
+	destination
+		distance 4 6
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "frontier"
+	npc accompany save
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant 3
+				"Shuttle"
+			variant 2
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+			variant
+				"Shuttle" 2
+	npc accompany save
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant
+				"Shuttle"
+			variant
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+			variant
+				"Argosy"
+			variant
+				"Blackbird"
+			variant
+				"Arrow"
+			variant
+				"Bounder"
+			variant
+				"Hauler"
+			variant
+				"Hauler II"
+	npc
+		government "Merchant"
+		personality escort opportunistic frugal launching
+			confusion 30
+		fleet
+			names "civilian"
+			variant
+				"Bastion"
+			variant
+				"Nest"
+				"Finch" 2
+			variant
+				"Mule"
+			variant
+				"Quicksilver" 2
+			variant
+				"Modified Argosy"
+	npc
+		government "Pirate"
+		personality harvests plunders coward
+			confusion 20
+		system destination
+		fleet "Small Southern Pirates"
+	on complete
+		payment 15000 3000
+		dialog "The captain of the <npc> gratefully thanks you for your participation in the convoy's defense, and pays you <payment>."
+	on visit
+		dialog phrase "generic arrived-without-npc dialog"
+
+mission "Taskship: Skein"
+	name "Militia soldiers to <planet>"
+	description "These <bunks> Militia soldiers need transport to <destination>. The Free Worlds will pay you <payment> for your troubles if they arrive safely."
+	job
+	repeat
+	passengers 6 11 .5
+	to offer
+		"reputation: Free Worlds" > 20
+		random < 30
+		has "flagship model: Skein"
+	source
+		government "Free Worlds"
+	destination
+		distance 2 10
+		government "Free Worlds"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment 6000 50
+		dialog "As you land on <planet>, the soldiers form up and disembark. Their commanding officer hands you a chit worth <payment>, which you promptly cash in."
+
+mission "Taskship: Sunder"
+	name "Iron mining"
+	description "A local company here on <planet> is looking for 10 tons of asteroid-mined iron. Mine the iron and return here by <date> in exchange for <payment>."
+	job
+	repeat
+	deadline 7
+	to offer
+		random < 30
+		has "flagship model: Sunder"
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent"
+	on visit
+		dialog `You've reached <destination>, but you don't have at least ten tons of iron in your cargo hold. Locate and mine iron asteroids before returning.`
+	on complete
+		require "Iron" 10
+		payment 18000
+		dialog "Upon landing, you are met by a corporate bureaucrat who thanks you for the shipment and hands you a credit chip worth <payment>."

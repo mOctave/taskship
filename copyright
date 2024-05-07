@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Taskship
+Upstream-Contact: mOctave <moctave31415@gmail.com>
+Source: https://github.com/mOctave/taskship
+
+Files: *
+Copyright: mOctave <moctave31415@gmail.com>
+License: AGPL-3.0-or-later

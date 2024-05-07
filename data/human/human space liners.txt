@@ -1,0 +1,66 @@
+# Copyright (c) 2024 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Hogshead"
+	name "Booze run to <planet>"
+	job
+	repeat
+	description "Run <cargo> to <destination> without being scanned or caught by planetary law enforcement. Payment is <payment>."
+	cargo "Illegal Alcohol" 5 2 .1
+	illegal 90000 `In addition to the fine, your illegal cargo is confiscated. The pirates won't be happy to hear about this.`
+	to offer
+		random < 80
+		has "flagship model: Hogshead"
+	source
+		government "Pirate"
+	destination
+		distance 3 10
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Pirate"
+	on visit
+		dialog phrase "generic cargo on visit"
+	on abort
+		"reputation: Pirate" -= 1
+		dialog phrase "generic aborted pirate cargo mission"
+	on fail
+		"reputation: Pirate" -= 1
+	on complete
+		payment 7000 400
+		dialog phrase "generic completed pirate cargo mission"
+
+mission "Taskship: Star Queen"
+	name "Interstellar cruise"
+	description "Bring <bunks> outrageously wealthy tourists on an interstellar cruise, stopping at <stopover planets> before returning to <destination>. Payment is <payment>."
+	job
+	repeat
+	passengers 30 30 .4
+	to offer
+		random < 20
+		has "flagship model: Star Queen"
+	to accept
+		has "outfit (installed): Luxury Accommodations"
+	source
+		attributes "paradise"
+	stopover
+		attributes "religious" "quarg" "pirate" "volcanic" "frontier"
+		distance 3 10
+	stopover
+		attributes "tourism"
+		distance 3 10
+	stopover
+		attributes "research" "station" "moon"
+		distance 3 10
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		dialog "Your passengers begin to wander off, heaped with whole suitcases stuffed full of meaningless trinkets and tourist memorabilia. You collect your payment of <payment>."
+		payment 40000 170

@@ -1,0 +1,143 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Arrow"
+	name "Corporate executives to <planet>"
+	job
+	repeat
+	description "These two corporate executives need transport to a conference on <destination>. Get them there by <date> for a payment of <payment>."
+	passengers 2
+	deadline
+	to offer
+		random < 30
+		has "flagship model: Arrow"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "urban"
+	destination
+		distance 2 10
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment
+		payment 8000
+		dialog phrase "generic passenger dropoff payment"
+
+mission "Taskship: Blackbird"
+	name "Tour the galaxy"
+	description "These <bunks> tourists wish to go on a tour of the galaxy, stopping at <planet stopovers> before returning home to <destination>. Payment is <payment>."
+	job
+	repeat
+	passengers 2 5 .4
+	to offer
+		random < 25
+		has "flagship model: Blackbird"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	stopover
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		distance 2 5
+		attributes "tourism"
+	stopover
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		distance 2 5
+		attributes "tourism"
+	stopover
+		distance 2 5
+	on visit
+		dialog "You've reached <planet>, but either your passengers have been left behind or you haven't gone everywhere they wanted to go yet!"
+	on complete
+		payment 3000 180
+		dialog "The tourists, loaded down with trinkets and a pile of t-shirts, thank you as they disembark. One of them hands you a credit chip worth <payment>."
+
+mission "Taskship: Bounder"
+	name "Passenger transport to <planet>"
+	job
+	repeat
+	description "Bring <fare> to <destination>. Payment is <payment>."
+	passengers 1 10 .9
+	to offer
+		random < 35
+		has "flagship model: Bounder"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		distance 15 80
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment
+		payment 5000
+		dialog phrase "generic passenger dropoff payment"
+
+mission "Taskship: Flivver"
+	name "Starship flight"
+	job
+	repeat
+	description "This passenger seeks to go to space for their first time. All you need to do is take off and land again on <planet>, and they'll pay you <payment>."
+	passengers 1
+	to offer
+		random < 40
+		has "flagship model: Flivver"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		not attributes "frontier"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment 1500
+		dialog "Grinning from ear to ear, your passenger stumbles queasily off your ship. Even though they suffered motion sickness during reentry, they are more than happy to pay you the agreed-upon <payment>."
+
+mission "Taskship: Heavy Shuttle"
+	name "Refugees to <planet>"
+	job
+	repeat
+	description "These <bunks> refugees are seeking to escape discrimination and unfair treatment on <origin>, and hope to start a better life on <destination>. In exchange for transport there, they'll pay <payment>."
+	passengers 2 10 .9
+	to offer
+		random < 30
+		has "flagship model: Heavy Shuttle"
+	source
+		government "Syndicate" "Pirate" "Independent"
+	destination
+		distance 4 8
+		government "Republic" "Free Worlds" "Neutral"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment 1000 120
+		dialog phrase "generic passenger dropoff payment"
+
+
+mission "Taskship: Scout"
+	name "Passenger transport to <planet>"
+	job
+	repeat
+	description "Bring <fare> to <destination>. Payment is <payment>."
+	passengers 1 10 .9
+	to offer
+		random < 30
+		has "flagship model: Scout"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	destination
+		distance 15 80
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment
+		payment 5000
+		dialog phrase "generic passenger dropoff payment"

@@ -1,0 +1,257 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Behemoth"
+	name "Frontier bulk delivery to <planet>"
+	job
+	repeat
+	description `Deliver <cargo> to the frontier world of <destination>. Frontier systems have a high rate of piracy, so prepare to defend yourself. Payment is <payment>.`
+	cargo random 25 4 .01
+	to offer
+		random < 25
+		has "flagship model: Behemoth"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		not attributes "frontier"
+	destination
+		not government "Pirate"
+		distance 2 10
+		attributes "frontier"
+	npc
+		government "Pirate"
+		personality nemesis harvests plunders
+			confusion 30
+		system destination
+		fleet "Small Northern Pirates"
+		fleet "Small Southern Pirates"
+	npc
+		government "Pirate"
+		personality nemesis staying harvests plunders
+			confusion 30
+		system destination
+		fleet "Large Northern Pirates"
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment 6000 180
+		dialog phrase "generic cargo delivery payment"
+
+# Bulk Freighter: Skipped
+
+# Container Transport: Skipped
+
+mission "Taskship: Hauler II"
+	name "Join convoy to <planet>"
+	job
+	repeat
+	description "The captain of the <npc> is looking for other freighter captains looking to join a convoy to <destination>. You will be expected to carry <cargo> in exchange for <payment> upon arrival on <planet>."
+	cargo random 15 2 .1
+	to offer
+		random < 50
+		has "flagship model: Hauler II"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "frontier"
+	destination
+		distance 2 10
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "frontier"
+	npc accompany save
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant
+				"Hauler"
+			variant
+				"Hauler II"
+			variant
+				"Hauler III"
+			variant
+				"Argosy"
+			variant
+				"Freighter"
+			variant
+				"Bulk Freighter"
+			variant
+				"Container Transport"
+	npc
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant 3
+				"Shuttle"
+			variant 2
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+	npc
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant 3
+				"Shuttle"
+			variant 2
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+	npc
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant
+				"Shuttle"
+			variant
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+			variant
+				"Argosy"
+			variant
+				"Blackbird"
+			variant
+				"Arrow"
+			variant
+				"Bounder"
+	npc
+		government "Merchant"
+		personality escort timid launching
+		fleet
+			names "civilian"
+			variant
+				"Flivver"
+			variant
+				"Shuttle"
+			variant
+				"Star Barge"
+			variant
+				"Heavy Shuttle"
+			variant
+				"Clipper"
+			variant
+				"Freighter"
+			variant
+				"Argosy"
+			variant
+				"Blackbird"
+			variant
+				"Arrow"
+			variant
+				"Bounder"
+	npc
+		government "Merchant"
+		personality escort heroic launching
+			confusion 30
+		fleet
+			names "civilian"
+			variant
+				"Sparrow"
+			variant
+				"Hawk"
+			variant
+				"Berserker"
+			variant
+				"Wasp"
+			variant
+				"Fury"
+	npc
+		government "Merchant"
+		personality escort heroic launching
+			confusion 30
+		fleet
+			names "civilian"
+			variant
+				"Sparrow"
+			variant
+				"Hawk"
+			variant
+				"Berserker"
+			variant
+				"Wasp"
+			variant
+				"Fury"
+	npc
+		government "Merchant"
+		personality escort heroic launching
+			confusion 30
+		fleet
+			names "civilian"
+			variant
+				"Modified Argosy"
+			variant
+				"Quicksilver"
+			variant
+				"Manta"
+			variant
+				"Bastion"
+			variant
+				"Raven"
+	npc
+		government "Pirate"
+		personality harvests plunders coward
+			confusion 20
+		system destination
+		fleet "Large Northern Pirates"
+		fleet "Small Southern Pirates"
+		fleet "Small Northern Pirates"
+		fleet "Small Core Pirates"
+	npc
+		government "Pirate"
+		personality harvests plunders coward waiting staying
+			confusion 20
+		system destination
+		fleet "Small Southern Pirates"
+		fleet "Small Northern Pirates"
+		fleet "Small Core Pirates"
+	on visit
+		dialog "You've arrived on <planet>, but you've either left some cargo behind our outpaced the convoy!"
+	on complete
+		payment 1000 140
+		dialog "When you land on <planet>, you are approached by the captain of the <npc>, who thanks you for your participation in the convoy and pays you <payment>."
+
+mission "Taskship: Hauler III"
+	job repeat
+	name "Ship chasis to <planet>"
+	description "Deliver a ship chasis weighing <tons> to the shipyard on <destination>, where it will be outfitted for sale. Payment is <payment>."
+	cargo "ship chassis" 5 40 .6
+	to offer
+		random < 30
+		has "flagship model: Hauler III"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "factory"
+		not attributes shipyard
+	destination
+		distance 2 8
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes shipyard
+	on visit
+		dialog phrase "generic cargo on visit"
+	on complete
+		payment 8000 160
+		dialog "During your final approach to <planet>, you are instructed to land right in the middle of the shipyard. You watch as workers carefully unload the ship chassis from the <ship>, and eventually the supervisor hands you <payment>."

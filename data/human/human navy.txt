@@ -1,0 +1,156 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Auxiliary"
+	name "Republic soldiers to <planet>"
+	description "These <bunks> Republic Ground Forces soldiers need transport to <destination>. The Republic will pay you <payment> for your troubles if they arrive safely."
+	job
+	repeat
+	passengers 10 40 .5
+	to offer
+		"reputation: Republic" > 20
+		random < 30
+		has "flagship model: Auxiliary"
+	source
+		government "Republic"
+	destination
+		distance 2 10
+		government "Republic"
+	on visit
+		dialog phrase "generic passenger on visit"
+	on complete
+		payment 4000 80
+		dialog "As you land on <planet>, the soldiers form up and disembark. Their commanding officer hands you a chit worth <payment>, which you promptly cash in."
+
+mission "Taskship: Frigate"
+	name "Show the flag"
+	description "Reassure the fine citizens of the Paradise Planets that the Republic will keep them safe by flying a patrol through <waypoints> with <bunks> concerned citizens. Then, return to <destination> for payment (<payment>)."
+	job
+	repeat
+	passengers 3 3 .9
+	to offer
+		"reputation: Republic" > 10
+		random < 30
+		has "flagship model: Frigate"
+	source
+		government "Republic"
+		attributes "near earth" "paradise" "north" "deep"
+	waypoint
+		government "Republic"
+		attributes "paradise"
+	waypoint
+		government "Republic"
+		attributes "paradise"
+	waypoint
+		government "Republic"
+		attributes "paradise"
+	on visit
+		dialog phrase "generic waypoint on visit"
+	on complete
+		payment 5000 120
+		dialog "Upon returning to <planet>, the civilians disembark. Soon, you receive a payment of <payment>."
+
+mission "Taskship: Gunboat (Innocent)"
+	name "Scan the <npc>"
+	description "A large merchant vessel has just entered the <system> system, and is being suspiciously evasive. Perform detailed scans of its outfits and cargo, then return to <planet> by <date> for <payment>."
+	job
+	repeat
+	deadline 4
+	to offer
+		"reputation: Republic" > 10
+		random < 5
+		has "flagship model: Gunboat"
+	source
+		government "Republic"
+	npc "scan outfits" "scan cargo"
+		personality timid secretive waiting lingering uninterested target
+		government "Merchant"
+		fleet
+			names "civilian"
+			variant
+				"Mule"
+			variant
+				"Bulk Freighter"
+			variant
+				"Container Transport"
+		dialog "You complete your scans of the <npc>, but find nothing unusual. Time to report back to the authorities on <planet>."
+	on visit
+		dialog "You've landed on <planet>, but the <npc> has not been scanned yet. Hunt it down and scan it before returning."
+	on complete
+		payment 25000
+		dialog "Touching down on <planet> after submitting your scanner logs, you are met by a disappointed lieutenant who hands you a credit chip worth <payment>."
+
+# Currently this scans incorrectly due to a bug with the vanilla game
+mission "Taskship: Gunboat (Guilty)"
+	name "Scan the <npc>"
+	description "A large merchant vessel has just entered the <system> system, and is being suspiciously evasive. Perform detailed scans of its outfits and cargo, then return to <planet> by <date> for <payment>."
+	job
+	repeat
+	deadline 4
+	to offer
+		"reputation: Republic" > 10
+		random < 35
+		has "flagship model: Gunboat"
+	source
+		government "Republic"
+	npc "scan outfits" "scan cargo"
+		"cargo settings"
+			cargo 5
+			commodities "Illegal Substances" "Highly Illegal Substances" "Illegal Cargo" "Highly Illegal Cargo" "Military"
+			outfitters "Pirate Outfits"
+		personality timid secretive waiting lingering uninterested target
+		government "Merchant"
+		fleet
+			names "civilian"
+			variant
+				"Mule"
+			variant
+				"Bulk Freighter"
+			variant
+				"Container Transport"
+		dialog "You complete your scans of the <npc>, and the reasons for its evasive behaviour become clear: the ship is chock-full of illegal substances and military equipment. You'd better report this to the authorities on <planet>."
+	on visit
+		dialog "You've landed on <planet>, but the <npc> has not been scanned yet. Hunt it down and scan it before returning."
+	on complete
+		payment 25000
+		dialog "Returning to <planet> after submitting your scanner logs, you pass a Navy patrol out to catch the offender you scanned. As soon as you land, you receive a transfer of <payment> to your account."
+
+mission "Taskship: Rainmaker"
+	name "Frontier patrol"
+	job
+	repeat
+	description "The Republic is looking for a pilot to conduct a patrol of several frontier planets that are believed to be harbouring pirates. Land on <stopover planets> before returning to <destination> and exchanging your logs for <payment>."
+	to offer
+		"reputation: Republic" > 10
+		random < 40
+		has "flagship model: Rainmaker"
+	source
+		government "Republic"
+		not attributes "paradise" "rich"
+	stopover
+		distance 2 5
+		government "Republic"
+		attributes "frontier"
+	stopover
+		distance 2 5
+		government "Republic"
+		attributes "frontier"
+	stopover
+		distance 2 5
+		government "Republic"
+		attributes "frontier"
+	on visit
+		dialog phrase "generic stopover on visit"
+	on complete
+		payment 35000
+		dialog "Landing on <planet>, you are met by a low-ranking Navy officer, who takes a copy of your logs and sensor data and hands you a credit chip worth <payment>."

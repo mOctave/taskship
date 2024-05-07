@@ -1,0 +1,52 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+government "Duelist"
+	swizzle 12
+	"player reputation" -1
+	"penalty for"
+		"assist" 0
+		"disable" 0
+		"board" 0
+		"capture" 0
+		"destroy" 0
+		"atrocity" 0
+		"scan" 0
+
+government `"Republic"`
+	swizzle 0
+	"player reputation" 1
+	"attitude towards"
+		`"Pirate"` -0.01
+	"penalty for"
+		"assist" 0
+		"disable" 0
+		"board" 0
+		"capture" 0
+		"destroy" 0
+		"atrocity" 0
+		"scan" 0
+
+government `"Pirate"`
+	swizzle 6
+	"player reputation" -1
+	"attitude towards"
+		`"Republic"` -0.01
+	"penalty for"
+		"assist" 0
+		"disable" 0
+		"board" 0
+		"capture" 0
+		"destroy" 0
+		"atrocity" 0
+		"scan" 0

@@ -1,0 +1,139 @@
+# Copyright (c) 2023 by mOctave
+#
+# Taskship is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Taskship is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+mission "Taskship: Headhunter"
+	name "Wanted corsair near <system>"
+	description "A small pirate fighter named the <npc> has been attacking merchants near the <system> system. Destroy it by <day> for payment (<payment>)."
+	repeat
+	job
+	deadline 14
+	"apparent payment" 30000
+	to offer
+		random < 40
+		has "flagship model: Headhunter"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "rim" "south" "north" "dirt belt" "core" "frontier"
+	npc kill
+		government "Bounty"
+		personality heroic staying nemesis target
+		system
+			distance 1 1
+		fleet
+			names "pirate"
+			variant 3
+				"Scrapper"
+			variant 6
+				"Sparrow"
+			variant
+				"Wasp"
+			variant
+				"Wasp (Gatling)"
+			variant
+				"Wasp (Javelin)"
+			variant
+				"Wasp (Meteor)"
+			variant
+				"Wasp (Plasma)"
+			variant
+				"Wasp (Proton)"
+		dialog phrase "generic hunted bounty eliminated and payment dialog"
+		on kill
+			payment 30000
+			fail
+
+mission "Taskship: Quicksilver"
+	name "Duel the <npc>"
+	job
+	repeat
+	description `The captain of the <npc> wishes to challenge you to a no-holds-barred light warship duel. If you win, you stand to win <payment>, but first you'll have to ante up 75,000 credits.`
+	"apparent payment" 150000
+	to offer
+		random < 15
+		has "flagship model: Quicksilver"
+		"total ships" = 1
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
+	npc disable
+		government "Duelist"
+		personality daring nemesis plunders unconstrained opportunistic staying launching
+			confusion 10
+		fleet
+			names "bounty hunter"
+			variant 2
+				"Quicksilver"
+			variant 2
+				"Quicksilver (Proton)"
+			variant 2
+				"Quicksilver (Scanner)"
+			variant
+				"Marauder Quicksilver (Safe)"
+			variant
+				"Marauder Quicksilver (Engines) (Safe)"
+			variant
+				"Marauder Quicksilver (Weapons) (Safe)"
+		dialog "You have successfully disabled the <npc>, and can stop firing on it now. Of course, no one said you have to stop now either..."
+		on disable
+			payment 150000
+	on accept
+		payment -75000
+
+
+mission "Taskship: Raven"
+	name "Wanted criminal near <system>"
+	description "A light pirate warship named the <npc> has been attacking merchants a jump away from the <system> system. Destroy it by <day> for payment (<payment>)."
+	repeat
+	job
+	deadline 14
+	"apparent payment" 95000
+	to offer
+		random < 20
+		has "flagship model: Raven"
+	source
+		government "Republic" "Free Worlds" "Syndicate" "Neutral" "Independent"
+		attributes "rim" "south" "north" "dirt belt" "core" "frontier"
+	npc kill
+		government "Bounty"
+		personality heroic staying nemesis target
+		system
+			distance 1 1
+		fleet
+			names "pirate"
+			variant
+				"Quicksilver"
+			variant
+				"Quicksilver (Proton)"
+			variant
+				"Raven"
+			variant
+				"Headhunter"
+			variant
+				"Headhunter (Strike)"
+			variant
+				"Headhunter (Particle)"
+			variant
+				"Clipper"
+			variant
+				"Clipper (Speedy)"
+			variant
+				"Hawk (Plasma)"
+			variant
+				"Fury (Gatling)"
+			variant
+				"Fury (Heavy)"
+			variant
+				"Fury (Laser)"
+		dialog phrase "generic hunted bounty eliminated and payment dialog"
+		on kill
+			payment 80000
+			fail
