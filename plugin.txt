@@ -1,2 +1,3 @@
 name "Taskship"
-about "Taskship is a pure content plugin designed to improve the vanilla experience by offering diverse jobs that are available only for captains of specific ships."
+about "Taskship is a pure content plugin designed to improve the vanilla experience by offering jobs aimed specifically at captains of certain ships."
+version "3.0.0"

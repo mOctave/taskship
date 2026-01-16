@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    name: Changed
+    uses: ./.github/workflows/changes.yml
+
+  test-parse:
+    name: Data Files
+    runs-on: windows-2022
+    needs: changed
+    if: ${{ needs.changed.outputs.workflows == 'true' || needs.changed.outputs.data_files == 'true' || needs.changed.outputs.assets == 'true' }}
+    steps:
+    - uses: warp-core/endless-sky-test-parse@master
+      with:
+        parse-assets: true
