@@ -18,19 +18,19 @@ I first published Taskship in 2023 as a zip. Then I put it on GitHub. And now, a
 
 Here's a handy guide to ships I've covered so far, in rough order of priority. If you have any ideas for jobs, feel free to suggest them!
 
--[x] Human ships (I think? Could have missed some newer ones)
--[ ] Hai ships
--[ ] Coalition ships
--[ ] Korath ships
--[ ] Remnant ships
--[ ] Gegno ships
--[ ] Bunrodea ships
--[ ] Successor ships
--[ ] Avgi ships
--[ ] Incipias ships
--[ ] Other ships I've forgotten exist
--[ ] Blended Ships
--[ ] Ships from other big ship-focused plugins
+- [x] Human ships (I think? Could have missed some newer ones)
+- [ ] Hai ships
+- [ ] Coalition ships
+- [ ] Korath ships
+- [ ] Remnant ships
+- [ ] Gegno ships
+- [ ] Bunrodea ships
+- [ ] Successor ships
+- [ ] Avgi ships
+- [ ] Incipias ships
+- [ ] Other ships I've forgotten exist
+- [ ] Blended Ships
+- [ ] Ships from other big ship-focused plugins
 
 ## Ships I'm Not Including
 
