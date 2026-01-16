@@ -20,7 +20,7 @@ mission "Taskship: Berserker"
 	to offer
 		random < 20
 		has "flagship model: Berserker"
-		"total ships" = 1
+		"total ships" == 1
 	source
 		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
 	npc disable
@@ -137,7 +137,7 @@ mission "Taskship: Fury"
 	to offer
 		random < 10
 		has "flagship model: Fury"
-		"total ships" = 1
+		"total ships" == 1
 	source
 		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
 	npc disable

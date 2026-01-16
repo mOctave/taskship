@@ -26,7 +26,7 @@ government "Duelist"
 government `"Republic"`
 	swizzle 0
 	"player reputation" 1
-	"attitude towards"
+	"attitude toward"
 		`"Pirate"` -0.01
 	"penalty for"
 		"assist" 0
@@ -40,7 +40,7 @@ government `"Republic"`
 government `"Pirate"`
 	swizzle 6
 	"player reputation" -1
-	"attitude towards"
+	"attitude toward"
 		`"Republic"` -0.01
 	"penalty for"
 		"assist" 0

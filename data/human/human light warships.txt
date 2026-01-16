@@ -61,7 +61,7 @@ mission "Taskship: Quicksilver"
 	to offer
 		random < 15
 		has "flagship model: Quicksilver"
-		"total ships" = 1
+		"total ships" == 1
 	source
 		government "Republic" "Syndicate" "Free Worlds" "Neutral" "Independent" "Pirate"
 	npc disable

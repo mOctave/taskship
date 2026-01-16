@@ -331,7 +331,7 @@ mission "Taskship: Manta"
 		dialog phrase "generic cargo on visit"
 	on complete
 		payment 4000 850
-		dialog "Slipping past the pirates, you enter the atmosphere of <planet> at the maximum safe speed. Your ship groans in metallic agony as you approach the landing pad, where an official runs out from a building and starts transfering packages. Suddenly, the sky lights up as the relief force arrives in your wake. Sitting in relative safety, you receive a payment of <payment>."
+		dialog "Slipping past the pirates, you enter the atmosphere of <planet> at the maximum safe speed. Your ship groans in metallic agony as you approach the landing pad, where an official runs out from a building and starts transferring packages. Suddenly, the sky lights up as the relief force arrives in your wake. Sitting in relative safety, you receive a payment of <payment>."
 
 mission "Taskship: Osprey"
 	name "Mock battle at <system>"
